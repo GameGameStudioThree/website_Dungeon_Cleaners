@@ -49,12 +49,21 @@
         .float-anim {
             animation: float 4s ease-in-out infinite;
         }
+        
+        @keyframes logo-pulse {
+            0% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.4)); }
+            50% { transform: scale(1.03); filter: drop-shadow(0 0 40px rgba(255, 255, 255, 1)); }
+            100% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.4)); }
+        }
+        .logo-anim {
+            animation: logo-pulse 3s ease-in-out infinite;
+        }
     </style>
 </head>
 <body class="bg-[#1a0505] text-white overflow-x-hidden">
 
     <!-- Intro / Mini Game Overlay -->
-    <div id="intro-overlay" class="fixed inset-0 z-50 flex items-center justify-center bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0ic3RvbmUiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjNGE0YTRhIi8+PHBhdGggZD0iTTAgMGg0MHY0MEgweiIgZmlsbD0iIzVhNWE1YSIgb3BhY2l0eT0iMC4zIi8+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiBmaWxsPSIjM2QzZDNkIiBvcGFjaXR5PSIwLjQiLz48cmVjdCB4PSIyMCIgeT0iMjAiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0iIzNkM2QzZCIgb3BhY2l0eT0iMC40Ii8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0idXJsKCNzdG9uZSkiLz48L3N2Zz4=')] bg-cover bg-center mop-cursor">
+    <div id="intro-overlay" class="fixed inset-0 z-50 flex items-center justify-center bg-[url('image/image1.webp')] bg-cover bg-center mop-cursor">
         <canvas id="dirt-canvas" class="absolute inset-0 w-full h-full"></canvas>
         <div id="intro-text" class="absolute pointer-events-none text-center select-none z-10 transition-opacity duration-500">
             <h2 class="text-4xl md:text-6xl text-yellow-500 mb-4 pixel-font neon-text">IT'S A MESS!</h2>
@@ -63,7 +72,7 @@
         <div id="progress-container" class="absolute bottom-10 left-1/2 transform -translate-x-1/2 w-64 h-4 bg-gray-900 rounded-full border-2 border-yellow-600 pointer-events-none z-10">
             <div id="clean-progress" class="h-full bg-yellow-500 rounded-full transition-all duration-100" style="width: 0%"></div>
         </div>
-        <button id="skip-btn" class="absolute bottom-4 right-4 text-gray-500 hover:text-white text-xs z-20 underline cursor-pointer">Skip Intro</button>
+        <button id="skip-btn" class="absolute bottom-4 right-4 text-gray-500 hover:text-white text-xl z-20 underline cursor-pointer">Skip Intro</button>
     </div>
 
     <!-- Navigation -->
@@ -93,12 +102,9 @@
                 <span class="bg-yellow-600 text-black text-xs px-2 py-1 rounded font-bold uppercase tracking-wide">Coming 2025</span>
             </div>
             
-            <!-- Random Icon Placeholder -->
-            <img id="hero-random-icon" alt="Random Dungeon Item" class="w-20 h-20 mx-auto mb-6 drop-shadow-[0_0_10px_rgba(255,215,0,0.5)] animate-pulse">
+            <!-- Fixed Logo -->
+            <img src="image/logo.webp" alt="Dungeon Janitor Logo" class="w-full max-w-lg mx-auto mb-8 logo-anim">
 
-            <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-6 pixel-font leading-tight">
-                DUNGEON <span class="text-yellow-500">Cleaner</span>
-            </h1>
             <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
                 Heroes slay the monsters. You clean up the mess. Experience the first-ever visceral first-person janitorial simulator set in a fantasy dungeon.
             </p>
@@ -106,7 +112,7 @@
                 <a href="http://site2.com" class="inline-block px-8 py-4 bg-red-800 hover:bg-red-700 text-white font-bold rounded shadow-[0_0_15px_rgba(255,215,0,0.3)] transition-all transform hover:scale-105 pixel-font text-sm border border-yellow-600 no-underline">
                     PLAY TRAILER
                 </a>
-                <a href="http://site3.com" class="inline-block px-8 py-4 bg-transparent border-2 border-white hover:bg-white hover:text-black text-white font-bold rounded transition-all transform hover:scale-105 pixel-font text-sm no-underline">
+                <a href="https://store.steampowered.com/app/3756600/Dungeon_Cleaners/" class="inline-block px-8 py-4 bg-transparent border-2 border-white hover:bg-white hover:text-black text-white font-bold rounded transition-all transform hover:scale-105 pixel-font text-sm no-underline">
                     WISHLIST ON STEAM
                 </a>
             </div>
@@ -157,7 +163,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row items-center gap-12">
                 <div class="w-full md:w-1/2">
-                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImdhbWVwbGF5IiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMWEyYTJhO3N0b3Atb3BhY2l0eToxIiAvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6IzBmMWYxZjtzdG9wLW9wYWNpdHk6MSIgLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0idXJsKCNnYW1lcGxheSkiLz48dGV4dCB4PSI1MCUiIHk9IjQ1JSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjQ4IiBmaWxsPSIjMjJjNTVlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBvcGFjaXR5PSIwLjgiPvCfp7k8L3RleHQ+PHRleHQgeD0iNTAlIiB5PSI1NSUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyNCIgZmlsbD0iI2FhYWFhYSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgb3BhY2l0eT0iMC42Ij5HYW1lcGxheSBTY3JlZW5zaG90PC90ZXh0Pjwvc3ZnPg==" alt="Gameplay Screenshot" class="rounded-lg shadow-2xl border-2 border-yellow-600 transform -rotate-2 hover:rotate-0 transition-transform duration-500">
+                    <img id="gameplay-carousel" src="image/image1.webp" alt="Gameplay Screenshot" class="rounded-lg shadow-2xl border-2 border-yellow-600 transform -rotate-2 hover:rotate-0 transition-transform duration-500 object-cover w-full h-64 md:h-96">
                 </div>
                 <div class="w-full md:w-1/2">
                     <h2 class="text-3xl font-bold text-white mb-6 pixel-font">BEFORE THE NEXT RAID</h2>
@@ -198,6 +204,16 @@
     <footer class="bg-black py-8 text-center text-gray-600 text-sm border-t border-red-900">
         <p>&copy; 2025 Dungeon Janitor Studios. All rights dirty.</p>
     </footer>
+
+    <!-- Audio Player Controls -->
+    <div id="audio-controls" class="fixed bottom-4 left-4 z-50 hidden">
+        <button id="music-toggle" class="bg-red-900/80 hover:bg-red-800 text-yellow-500 border border-yellow-600 p-3 rounded-full shadow-lg transition-all hover:scale-110 cursor-pointer">
+            <span id="music-icon">🔊</span>
+        </button>
+        <audio id="bg-music" loop>
+            <source src="music/audio.mp3" type="audio/mpeg">
+        </audio>
+    </div>
 
     <script src="config.js"></script>
     <script>
@@ -313,6 +329,8 @@
 
                 setTimeout(() => {
                     introOverlay.style.display = 'none';
+                    // Start Music Here
+                    startMusic();
                 }, 1800);
                 
                 if (checkInterval) clearInterval(checkInterval);
@@ -369,18 +387,69 @@
             // Skip Button
             document.getElementById('skip-btn').addEventListener('click', finishGame);
 
-            // --- Random Image Logic ---
-            const icons = [
-                'image1.WebP',
-                'image2.WebP',
-                'image3.WebP'
-            ];
-            
-            const randomIcon = document.getElementById('hero-random-icon');
-            if (randomIcon) {
-                const randomIndex = Math.floor(Math.random() * icons.length);
-                randomIcon.src = icons[randomIndex];
+            // --- Image Carousel Logic ---
+            const carouselImg = document.getElementById('gameplay-carousel');
+            const images = ['image/image1.webp', 'image/image2.webp', 'image/image3.webp'];
+            let currentImgIndex = 0;
+
+            setInterval(() => {
+                currentImgIndex = (currentImgIndex + 1) % images.length;
+                carouselImg.style.opacity = '0'; // Fade out
+                setTimeout(() => {
+                    carouselImg.src = images[currentImgIndex];
+                    carouselImg.onload = () => {
+                        carouselImg.style.opacity = '1'; // Fade in
+                    };
+                }, 500); // Wait for fade out
+            }, 10000); // 10 seconds
+
+            // --- Audio Player Logic ---
+            const musicToggle = document.getElementById('music-toggle');
+            const bgMusic = document.getElementById('bg-music');
+            const musicIcon = document.getElementById('music-icon');
+            const audioControls = document.getElementById('audio-controls');
+            let isPlaying = false;
+
+            // Function to try playing music (browser might block if no interaction)
+            function startMusic() {
+                audioControls.classList.remove('hidden');
+                bgMusic.volume = 0.3; // Set volume to 30%
+                const playPromise = bgMusic.play();
+                
+                if (playPromise !== undefined) {
+                    playPromise.then(_ => {
+                        isPlaying = true;
+                        musicIcon.textContent = '🔊';
+                    })
+                    .catch(error => {
+                        console.log("Auto-play prevented. User must click play.");
+                        isPlaying = false;
+                        musicIcon.textContent = '🔇';
+                    });
+                }
             }
+
+            musicToggle.addEventListener('click', () => {
+                if (isPlaying) {
+                    bgMusic.pause();
+                    musicIcon.textContent = '🔇';
+                } else {
+                    bgMusic.play();
+                    musicIcon.textContent = '🔊';
+                }
+                isPlaying = !isPlaying;
+            });
+
+            // Hook into finishGame to start music
+            const originalFinishGame = finishGame; // Capture the local function reference if possible, 
+            // but since finishGame is defined inside the closure above, we need to move this logic inside the closure 
+            // or modify the finishGame function directly.
+            // Since I am appending this script, I cannot easily access 'finishGame' from outside if it wasn't exposed.
+            // However, I am editing the script block *inside* the DOMContentLoaded event in the previous steps? 
+            // Wait, the previous 'replacement' was just the end of the block.
+            // Correct approach: I need to modify the `finishGame` function inside the main logic block.
+            
+            // Let's re-edit the `finishGame` function in the main block instead of appending code that might not reach the scope.
         });
     </script>
 </body>
