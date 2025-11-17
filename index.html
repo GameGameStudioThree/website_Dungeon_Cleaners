@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dungeon Janitor - Clean Up The Mess!</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            cursor: default;
+        }
+        h1, h2, h3, .pixel-font {
+            font-family: 'Press Start 2P', cursive;
+        }
+        /* Custom Cursor for the game area */
+        .mop-cursor {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewport="0 0 32 32" style="fill:black;font-size:24px"><text y="50%">🧹</text></svg>') 16 16, auto; 
+        }
+        
+        #dirt-canvas {
+            touch-action: none;
+        }
+
+        .neon-text {
+            text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #00ff00, 0 0 30px #00ff00, 0 0 40px #00ff00;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        .float-anim {
+            animation: float 4s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white overflow-x-hidden">
+
+    <!-- Intro / Mini Game Overlay -->
+    <div id="intro-overlay" class="fixed inset-0 z-50 flex items-center justify-center bg-[url('https://images.unsplash.com/photo-1605806616949-1e87b487bc2a?q=80&w=1887&auto=format&fit=crop')] bg-cover bg-center mop-cursor">
+        <canvas id="dirt-canvas" class="absolute inset-0 w-full h-full"></canvas>
+        <div id="intro-text" class="absolute pointer-events-none text-center select-none z-10 transition-opacity duration-500">
+            <h2 class="text-4xl md:text-6xl text-green-400 mb-4 pixel-font neon-text">IT'S A MESS!</h2>
+            <p class="text-xl md:text-2xl text-gray-300 animate-pulse">Use your mop to clean the screen...</p>
+        </div>
+        <div id="progress-container" class="absolute bottom-10 left-1/2 transform -translate-x-1/2 w-64 h-4 bg-gray-800 rounded-full border-2 border-green-600 pointer-events-none z-10">
+            <div id="clean-progress" class="h-full bg-green-500 rounded-full transition-all duration-100" style="width: 0%"></div>
+        </div>
+        <button id="skip-btn" class="absolute bottom-4 right-4 text-gray-500 hover:text-white text-xs z-20 underline cursor-pointer">Skip Intro</button>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-40 bg-gray-900/90 border-b border-green-700 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-green-400 text-xl pixel-font">DJ</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#home" class="hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="#features" class="hover:bg-gray-700 text-gray-300 px-3 py-2 rounded-md text-sm font-medium">Features</a>
+                        <a href="#media" class="hover:bg-gray-700 text-gray-300 px-3 py-2 rounded-md text-sm font-medium">Media</a>
+                        <button class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors">Pre-Order Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative h-screen flex items-center justify-center bg-[url('https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&auto=format&fit=crop&w=2071&q=80')] bg-cover bg-center">
+        <div class="absolute inset-0 bg-black/70"></div>
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto">
+            <div class="mb-8 inline-block">
+                <span class="bg-green-600 text-black text-xs px-2 py-1 rounded font-bold uppercase tracking-wide">Coming 2025</span>
+            </div>
+            <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-6 pixel-font leading-tight">
+                DUNGEON <span class="text-green-500">JANITOR</span>
+            </h1>
+            <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
+                Heroes slay the monsters. You clean up the mess. Experience the first-ever visceral first-person janitorial simulator set in a fantasy dungeon.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <button class="px-8 py-4 bg-green-600 hover:bg-green-500 text-white font-bold rounded shadow-[0_0_15px_rgba(22,163,74,0.5)] transition-all transform hover:scale-105 pixel-font text-sm">
+                    PLAY TRAILER
+                </button>
+                <button class="px-8 py-4 bg-transparent border-2 border-white hover:bg-white hover:text-black text-white font-bold rounded transition-all transform hover:scale-105 pixel-font text-sm">
+                    WISHLIST ON STEAM
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 pixel-font text-green-400">GAME FEATURES</h2>
+                <div class="w-24 h-1 bg-green-600 mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-gray-800 p-8 rounded-lg border border-gray-700 hover:border-green-500 transition-colors float-anim" style="animation-delay: 0s;">
+                    <div class="text-4xl mb-4">🧹</div>
+                    <h3 class="text-xl font-bold text-white mb-2">Advanced Mop Physics</h3>
+                    <p class="text-gray-400">
+                        Feel the weight of the grime. Our proprietary SlimeEngine™ calculates viscosity in real-time.
+                    </p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="bg-gray-800 p-8 rounded-lg border border-gray-700 hover:border-green-500 transition-colors float-anim" style="animation-delay: 1s;">
+                    <div class="text-4xl mb-4">🧪</div>
+                    <h3 class="text-xl font-bold text-white mb-2">Alchemy Cleaning</h3>
+                    <p class="text-gray-400">
+                        Mix potions to dissolve dragon blood, goblin guts, and mystery oozes. Don't mix the wrong ones!
+                    </p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="bg-gray-800 p-8 rounded-lg border border-gray-700 hover:border-green-500 transition-colors float-anim" style="animation-delay: 2s;">
+                    <div class="text-4xl mb-4">💰</div>
+                    <h3 class="text-xl font-bold text-white mb-2">Loot the Leftovers</h3>
+                    <p class="text-gray-400">
+                        Keep what the heroes missed. Upgrade your mop, bucket, and boots with legendary loot.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Media Section -->
+    <section id="media" class="py-20 bg-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="w-full md:w-1/2">
+                    <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Gameplay Screenshot" class="rounded-lg shadow-2xl border-2 border-green-600 transform -rotate-2 hover:rotate-0 transition-transform duration-500">
+                </div>
+                <div class="w-full md:w-1/2">
+                    <h2 class="text-3xl font-bold text-white mb-6 pixel-font">BEFORE THE NEXT RAID</h2>
+                    <p class="text-gray-300 text-lg mb-6">
+                        The dungeon doesn't clean itself. You are the unsung hero of the underworld. While adventurers get the glory, you get the minimum wage gold coins.
+                    </p>
+                    <ul class="space-y-4 text-gray-300">
+                        <li class="flex items-center">
+                            <span class="text-green-500 mr-2">✓</span> Co-op cleaning mode (up to 4 janitors)
+                        </li>
+                        <li class="flex items-center">
+                            <span class="text-green-500 mr-2">✓</span> Over 50 types of mythical stains
+                        </li>
+                        <li class="flex items-center">
+                            <span class="text-green-500 mr-2">✓</span> Career mode: From Tavern to Throne Room
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="py-20 bg-green-900 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48ZyBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0wIDQwTDQwIDBIMHY0MHpNNDAgNDBWMHgyMHYyMHoiIGZpbGw9IiNmZmYiIG9wYWNpdHk9IjEiLz48L2c+PC9zdmc+')]"></div>
+        <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
+            <h2 class="text-3xl font-bold text-white mb-4 pixel-font">JOIN THE CLEAN-UP CREW</h2>
+            <p class="text-green-100 mb-8">Sign up for updates and get an exclusive "Golden Mop" skin at launch.</p>
+            <form class="flex flex-col sm:flex-row gap-4 justify-center">
+                <input type="email" placeholder="Enter your email" class="px-6 py-3 rounded bg-green-800 text-white border border-green-600 focus:outline-none focus:border-white w-full sm:w-auto placeholder-green-300">
+                <button type="submit" class="px-8 py-3 bg-white text-green-900 font-bold rounded hover:bg-gray-100 transition-colors pixel-font text-xs">
+                    SUBSCRIBE
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="bg-black py-8 text-center text-gray-500 text-sm">
+        <p>&copy; 2025 Dungeon Janitor Studios. All rights dirty.</p>
+    </footer>
+
+    <script>
+        // --- Mini Game Logic ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('dirt-canvas');
+            const ctx = canvas.getContext('2d');
+            const introOverlay = document.getElementById('intro-overlay');
+            const introText = document.getElementById('intro-text');
+            const progressBar = document.getElementById('clean-progress');
+            
+            let width, height;
+            let isDrawing = false;
+            let clearedPixels = 0;
+            let totalPixels = 0;
+            
+            // Resize canvas to fill screen
+            function resize() {
+                width = window.innerWidth;
+                height = window.innerHeight;
+                canvas.width = width;
+                canvas.height = height;
+                
+                // Redraw dirt on resize (resets progress, simple approach)
+                fillDirt();
+            }
+
+            function fillDirt() {
+                ctx.globalCompositeOperation = 'source-over';
+                ctx.fillStyle = '#1a1a1a'; // Dark background
+                ctx.fillRect(0, 0, width, height);
+                
+                // Add some "slime" spots
+                for(let i=0; i<50; i++) {
+                    const x = Math.random() * width;
+                    const y = Math.random() * height;
+                    const r = Math.random() * 100 + 50;
+                    
+                    ctx.beginPath();
+                    ctx.arc(x, y, r, 0, Math.PI * 2);
+                    ctx.fillStyle = Math.random() > 0.5 ? '#1e291b' : '#0f172a'; // Subtle varied dark colors
+                    ctx.fill();
+                }
+
+                // Add text to canvas so it gets erased too? 
+                // No, keep text separate HTML so it's readable, but cover it slightly?
+                // Let's just keep the canvas opaque dark.
+                
+                totalPixels = width * height;
+                // Initial check (will be 0%)
+                progressBar.style.width = '0%';
+            }
+            
+            function getMousePos(evt) {
+                const rect = canvas.getBoundingClientRect();
+                // Handle touch and mouse
+                const clientX = evt.touches ? evt.touches[0].clientX : evt.clientX;
+                const clientY = evt.touches ? evt.touches[0].clientY : evt.clientY;
+                return {
+                    x: clientX - rect.left,
+                    y: clientY - rect.top
+                };
+            }
+            
+            function scratch(x, y) {
+                ctx.globalCompositeOperation = 'destination-out';
+                ctx.beginPath();
+                ctx.arc(x, y, 60, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Optimization: Check progress periodically, not every pixel
+                // We'll rely on a throttle or just check every N events for performance if needed.
+                // For now, let's just estimate progress based on mouse movement distance or 
+                // use a simpler "counter" approach. 
+                // Actually, `getImageData` is heavy. Let's approximate "cleared" by just counting scratch events 
+                // or strictly only checking when mouse lifts? 
+                // Let's check on intervals.
+            }
+            
+            let checkInterval = null;
+            
+            function checkProgress() {
+                // Sample the center area or a grid to guess progress to avoid heavy processing
+                // Or just do the heavy processing because it's a simple landing page.
+                // Let's use a low-res sample.
+                
+                const sampleStep = 20; // check every 20th pixel
+                const imageData = ctx.getImageData(0, 0, width, height);
+                const data = imageData.data;
+                let transparentCount = 0;
+                let sampleCount = 0;
+                
+                for (let i = 3; i < data.length; i += 4 * sampleStep) {
+                    sampleCount++;
+                    if (data[i] === 0) { // Alpha channel is 0
+                        transparentCount++;
+                    }
+                }
+                
+                const percentage = Math.floor((transparentCount / sampleCount) * 100);
+                progressBar.style.width = percentage + '%';
+                
+                if (percentage > 85) {
+                    finishGame();
+                }
+            }
+
+            function finishGame() {
+                // First fade out the dirt and UI elements to reveal the clean floor fully
+                canvas.style.transition = 'opacity 0.5s';
+                canvas.style.opacity = '0';
+                introText.style.opacity = '0';
+                document.getElementById('progress-container').style.opacity = '0';
+                
+                // Then after a short delay, fade out the floor to reveal the site
+                setTimeout(() => {
+                    introOverlay.style.transition = 'opacity 1s';
+                    introOverlay.style.opacity = '0';
+                }, 800);
+
+                setTimeout(() => {
+                    introOverlay.style.display = 'none';
+                }, 1800);
+                
+                if (checkInterval) clearInterval(checkInterval);
+            }
+
+            // Event Listeners
+            window.addEventListener('resize', resize);
+            
+            // Mouse
+            canvas.addEventListener('mousedown', (e) => {
+                isDrawing = true;
+                scratch(getMousePos(e).x, getMousePos(e).y);
+                if (!checkInterval) checkInterval = setInterval(checkProgress, 200);
+            });
+            window.addEventListener('mouseup', () => {
+                isDrawing = false;
+                if (checkInterval) {
+                    clearInterval(checkInterval);
+                    checkInterval = null;
+                    checkProgress(); // One last check
+                }
+            });
+            canvas.addEventListener('mousemove', (e) => {
+                if (!isDrawing) return;
+                const pos = getMousePos(e);
+                scratch(pos.x, pos.y);
+                
+                // Add particles effect at cursor (optional polish)
+            });
+
+            // Touch
+            canvas.addEventListener('touchstart', (e) => {
+                e.preventDefault(); // Prevent scrolling
+                isDrawing = true;
+                const pos = getMousePos(e);
+                scratch(pos.x, pos.y);
+                if (!checkInterval) checkInterval = setInterval(checkProgress, 200);
+            }, { passive: false });
+            canvas.addEventListener('touchend', () => {
+                isDrawing = false;
+                if (checkInterval) {
+                    clearInterval(checkInterval);
+                    checkInterval = null;
+                }
+            });
+            canvas.addEventListener('touchmove', (e) => {
+                e.preventDefault(); 
+                if (!isDrawing) return;
+                const pos = getMousePos(e);
+                scratch(pos.x, pos.y);
+            }, { passive: false });
+
+            // Init
+            resize();
+
+            // Skip Button
+            document.getElementById('skip-btn').addEventListener('click', finishGame);
+        });
+    </script>
+</body>
+</html>
