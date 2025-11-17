@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dungeon Janitor - Clean Up The Mess!</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧹</text></svg>">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -16,7 +17,7 @@
         }
         /* Custom Cursor for the game area */
         .mop-cursor {
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewport="0 0 32 32" style="fill:black;font-size:24px"><text y="50%">🧹</text></svg>') 16 16, auto; 
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewport="0 0 48 48" style="fill:black;font-size:36px"><text y="50%">🧹</text></svg>') 24 24, auto; 
         }
         
         #dirt-canvas {
@@ -37,7 +38,7 @@
         }
 
         .neon-text {
-            text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #00ff00, 0 0 30px #00ff00, 0 0 40px #00ff00;
+            text-shadow: 0 0 5px #fff, 0 0 10px #ffd700, 0 0 20px #ffd700, 0 0 30px #ff0000, 0 0 40px #ff0000;
         }
         
         @keyframes float {
@@ -50,34 +51,34 @@
         }
     </style>
 </head>
-<body class="bg-gray-900 text-white overflow-x-hidden">
+<body class="bg-[#1a0505] text-white overflow-x-hidden">
 
     <!-- Intro / Mini Game Overlay -->
     <div id="intro-overlay" class="fixed inset-0 z-50 flex items-center justify-center bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0ic3RvbmUiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjNGE0YTRhIi8+PHBhdGggZD0iTTAgMGg0MHY0MEgweiIgZmlsbD0iIzVhNWE1YSIgb3BhY2l0eT0iMC4zIi8+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiBmaWxsPSIjM2QzZDNkIiBvcGFjaXR5PSIwLjQiLz48cmVjdCB4PSIyMCIgeT0iMjAiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0iIzNkM2QzZCIgb3BhY2l0eT0iMC40Ii8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0idXJsKCNzdG9uZSkiLz48L3N2Zz4=')] bg-cover bg-center mop-cursor">
         <canvas id="dirt-canvas" class="absolute inset-0 w-full h-full"></canvas>
         <div id="intro-text" class="absolute pointer-events-none text-center select-none z-10 transition-opacity duration-500">
-            <h2 class="text-4xl md:text-6xl text-green-400 mb-4 pixel-font neon-text">IT'S A MESS!</h2>
+            <h2 class="text-4xl md:text-6xl text-yellow-500 mb-4 pixel-font neon-text">IT'S A MESS!</h2>
             <p class="text-xl md:text-2xl text-gray-300 animate-pulse">Use your mop to clean the screen...</p>
         </div>
-        <div id="progress-container" class="absolute bottom-10 left-1/2 transform -translate-x-1/2 w-64 h-4 bg-gray-800 rounded-full border-2 border-green-600 pointer-events-none z-10">
-            <div id="clean-progress" class="h-full bg-green-500 rounded-full transition-all duration-100" style="width: 0%"></div>
+        <div id="progress-container" class="absolute bottom-10 left-1/2 transform -translate-x-1/2 w-64 h-4 bg-gray-900 rounded-full border-2 border-yellow-600 pointer-events-none z-10">
+            <div id="clean-progress" class="h-full bg-yellow-500 rounded-full transition-all duration-100" style="width: 0%"></div>
         </div>
         <button id="skip-btn" class="absolute bottom-4 right-4 text-gray-500 hover:text-white text-xs z-20 underline cursor-pointer">Skip Intro</button>
     </div>
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-40 bg-gray-900/90 border-b border-green-700 backdrop-blur-sm">
+    <nav class="fixed w-full z-40 bg-[#1a0505]/90 border-b border-red-900 backdrop-blur-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center">
-                    <span class="text-green-400 text-xl pixel-font">DJ</span>
+                    <span class="text-yellow-500 text-xl pixel-font">DJ</span>
                 </div>
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-4">
-                        <a href="#home" class="hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
-                        <a href="#features" class="hover:bg-gray-700 text-gray-300 px-3 py-2 rounded-md text-sm font-medium">Features</a>
-                        <a href="#media" class="hover:bg-gray-700 text-gray-300 px-3 py-2 rounded-md text-sm font-medium">Media</a>
-                        <button class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors">Pre-Order Now</button>
+                        <a href="#home" class="hover:bg-red-900 text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="#features" class="hover:bg-red-900 text-gray-300 px-3 py-2 rounded-md text-sm font-medium">Features</a>
+                        <a href="#media" class="hover:bg-red-900 text-gray-300 px-3 py-2 rounded-md text-sm font-medium">Media</a>
+                        <a href="http://site1.com" class="bg-red-800 hover:bg-red-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors border border-yellow-600 inline-block">Pre-Order Now</a>
                     </div>
                 </div>
             </div>
@@ -86,39 +87,43 @@
 
     <!-- Hero Section -->
     <section id="home" class="relative h-screen flex items-center justify-center bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyMCIgaGVpZ2h0PSIxMDgwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZHVuZ2VvbiIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMxYTFhMWE7c3RvcC1vcGFjaXR5OjEiIC8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMGYxNzJhO3N0b3Atb3BhY2l0eToxIiAvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxOTIwIiBoZWlnaHQ9IjEwODAiIGZpbGw9InVybCgjZHVuZ2VvbikiLz48Y2lyY2xlIGN4PSI0MDAiIGN5PSIzMDAiIHI9IjUiIGZpbGw9IiM2NjY2NjYiIG9wYWNpdHk9IjAuMyIvPjxjaXJjbGUgY3g9IjgwMCIgY3k9IjIwMCIgcj0iMyIgZmlsbD0iIzY2NjY2NiIgb3BhY2l0eT0iMC4zIi8+PGNpcmNsZSBjeD0iMTIwMCIgY3k9IjQwMCIgcj0iNCIgZmlsbD0iIzY2NjY2NiIgb3BhY2l0eT0iMC4zIi8+PGNpcmNsZSBjeD0iMTYwMCIgY3k9IjMwMCIgcj0iMyIgZmlsbD0iIzY2NjY2NiIgb3BhY2l0eT0iMC4zIi8+PGNpcmNsZSBjeD0iMzAwIiBjeT0iNzAwIiByPSI0IiBmaWxsPSIjNjY2NjY2IiBvcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSIxNDAwIiBjeT0iODAwIiByPSI1IiBmaWxsPSIjNjY2NjY2IiBvcGFjaXR5PSIwLjMiLz48L3N2Zz4=')] bg-cover bg-center">
-        <div class="absolute inset-0 bg-black/70"></div>
+        <div class="absolute inset-0 bg-[#0f0202]/80"></div>
         <div class="relative z-10 text-center px-4 max-w-4xl mx-auto">
             <div class="mb-8 inline-block">
-                <span class="bg-green-600 text-black text-xs px-2 py-1 rounded font-bold uppercase tracking-wide">Coming 2025</span>
+                <span class="bg-yellow-600 text-black text-xs px-2 py-1 rounded font-bold uppercase tracking-wide">Coming 2025</span>
             </div>
+            
+            <!-- Random Icon Placeholder -->
+            <img id="hero-random-icon" alt="Random Dungeon Item" class="w-20 h-20 mx-auto mb-6 drop-shadow-[0_0_10px_rgba(255,215,0,0.5)] animate-pulse">
+
             <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-6 pixel-font leading-tight">
-                DUNGEON <span class="text-green-500">JANITOR</span>
+                DUNGEON <span class="text-yellow-500">Cleaner</span>
             </h1>
             <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
                 Heroes slay the monsters. You clean up the mess. Experience the first-ever visceral first-person janitorial simulator set in a fantasy dungeon.
             </p>
             <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <button class="px-8 py-4 bg-green-600 hover:bg-green-500 text-white font-bold rounded shadow-[0_0_15px_rgba(22,163,74,0.5)] transition-all transform hover:scale-105 pixel-font text-sm">
+                <a href="http://site2.com" class="inline-block px-8 py-4 bg-red-800 hover:bg-red-700 text-white font-bold rounded shadow-[0_0_15px_rgba(255,215,0,0.3)] transition-all transform hover:scale-105 pixel-font text-sm border border-yellow-600 no-underline">
                     PLAY TRAILER
-                </button>
-                <button class="px-8 py-4 bg-transparent border-2 border-white hover:bg-white hover:text-black text-white font-bold rounded transition-all transform hover:scale-105 pixel-font text-sm">
+                </a>
+                <a href="http://site3.com" class="inline-block px-8 py-4 bg-transparent border-2 border-white hover:bg-white hover:text-black text-white font-bold rounded transition-all transform hover:scale-105 pixel-font text-sm no-underline">
                     WISHLIST ON STEAM
-                </button>
+                </a>
             </div>
         </div>
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="py-20 bg-gray-900">
+    <section id="features" class="py-20 bg-[#2a0a0a]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 pixel-font text-green-400">GAME FEATURES</h2>
-                <div class="w-24 h-1 bg-green-600 mx-auto"></div>
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 pixel-font text-yellow-500">GAME FEATURES</h2>
+                <div class="w-24 h-1 bg-yellow-600 mx-auto"></div>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Feature 1 -->
-                <div class="bg-gray-800 p-8 rounded-lg border border-gray-700 hover:border-green-500 transition-colors float-anim" style="animation-delay: 0s;">
+                <div class="bg-[#3d1010] p-8 rounded-lg border border-red-900 hover:border-yellow-500 transition-colors float-anim" style="animation-delay: 0s;">
                     <div class="text-4xl mb-4">🧹</div>
                     <h3 class="text-xl font-bold text-white mb-2">Advanced Mop Physics</h3>
                     <p class="text-gray-400">
@@ -127,7 +132,7 @@
                 </div>
                 
                 <!-- Feature 2 -->
-                <div class="bg-gray-800 p-8 rounded-lg border border-gray-700 hover:border-green-500 transition-colors float-anim" style="animation-delay: 1s;">
+                <div class="bg-[#3d1010] p-8 rounded-lg border border-red-900 hover:border-yellow-500 transition-colors float-anim" style="animation-delay: 1s;">
                     <div class="text-4xl mb-4">🧪</div>
                     <h3 class="text-xl font-bold text-white mb-2">Alchemy Cleaning</h3>
                     <p class="text-gray-400">
@@ -136,7 +141,7 @@
                 </div>
                 
                 <!-- Feature 3 -->
-                <div class="bg-gray-800 p-8 rounded-lg border border-gray-700 hover:border-green-500 transition-colors float-anim" style="animation-delay: 2s;">
+                <div class="bg-[#3d1010] p-8 rounded-lg border border-red-900 hover:border-yellow-500 transition-colors float-anim" style="animation-delay: 2s;">
                     <div class="text-4xl mb-4">💰</div>
                     <h3 class="text-xl font-bold text-white mb-2">Loot the Leftovers</h3>
                     <p class="text-gray-400">
@@ -148,11 +153,11 @@
     </section>
 
     <!-- Media Section -->
-    <section id="media" class="py-20 bg-gray-800">
+    <section id="media" class="py-20 bg-[#1a0505]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row items-center gap-12">
                 <div class="w-full md:w-1/2">
-                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImdhbWVwbGF5IiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMWEyYTJhO3N0b3Atb3BhY2l0eToxIiAvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6IzBmMWYxZjtzdG9wLW9wYWNpdHk6MSIgLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0idXJsKCNnYW1lcGxheSkiLz48dGV4dCB4PSI1MCUiIHk9IjQ1JSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjQ4IiBmaWxsPSIjMjJjNTVlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBvcGFjaXR5PSIwLjgiPvCfp7k8L3RleHQ+PHRleHQgeD0iNTAlIiB5PSI1NSUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyNCIgZmlsbD0iI2FhYWFhYSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgb3BhY2l0eT0iMC42Ij5HYW1lcGxheSBTY3JlZW5zaG90PC90ZXh0Pjwvc3ZnPg==" alt="Gameplay Screenshot" class="rounded-lg shadow-2xl border-2 border-green-600 transform -rotate-2 hover:rotate-0 transition-transform duration-500">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImdhbWVwbGF5IiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMWEyYTJhO3N0b3Atb3BhY2l0eToxIiAvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6IzBmMWYxZjtzdG9wLW9wYWNpdHk6MSIgLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0idXJsKCNnYW1lcGxheSkiLz48dGV4dCB4PSI1MCUiIHk9IjQ1JSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjQ4IiBmaWxsPSIjMjJjNTVlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBvcGFjaXR5PSIwLjgiPvCfp7k8L3RleHQ+PHRleHQgeD0iNTAlIiB5PSI1NSUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyNCIgZmlsbD0iI2FhYWFhYSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgb3BhY2l0eT0iMC42Ij5HYW1lcGxheSBTY3JlZW5zaG90PC90ZXh0Pjwvc3ZnPg==" alt="Gameplay Screenshot" class="rounded-lg shadow-2xl border-2 border-yellow-600 transform -rotate-2 hover:rotate-0 transition-transform duration-500">
                 </div>
                 <div class="w-full md:w-1/2">
                     <h2 class="text-3xl font-bold text-white mb-6 pixel-font">BEFORE THE NEXT RAID</h2>
@@ -161,13 +166,13 @@
                     </p>
                     <ul class="space-y-4 text-gray-300">
                         <li class="flex items-center">
-                            <span class="text-green-500 mr-2">✓</span> Co-op cleaning mode (up to 4 janitors)
+                            <span class="text-yellow-500 mr-2">✓</span> Co-op cleaning mode (up to 4 janitors)
                         </li>
                         <li class="flex items-center">
-                            <span class="text-green-500 mr-2">✓</span> Over 50 types of mythical stains
+                            <span class="text-yellow-500 mr-2">✓</span> Over 50 types of mythical stains
                         </li>
                         <li class="flex items-center">
-                            <span class="text-green-500 mr-2">✓</span> Career mode: From Tavern to Throne Room
+                            <span class="text-yellow-500 mr-2">✓</span> Career mode: From Tavern to Throne Room
                         </li>
                     </ul>
                 </div>
@@ -176,21 +181,21 @@
     </section>
 
     <!-- Newsletter -->
-    <section class="py-20 bg-green-900 relative overflow-hidden">
+    <section class="py-20 bg-red-950 relative overflow-hidden border-t border-red-900">
         <div class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48ZyBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0wIDQwTDQwIDBIMHY0MHpNNDAgNDBWMHgyMHYyMHoiIGZpbGw9IiNmZmYiIG9wYWNpdHk9IjEiLz48L2c+PC9zdmc+')]"></div>
         <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
             <h2 class="text-3xl font-bold text-white mb-4 pixel-font">JOIN THE CLEAN-UP CREW</h2>
-            <p class="text-green-100 mb-8">Sign up for updates and get an exclusive "Golden Mop" skin at launch.</p>
+            <p class="text-red-200 mb-8">Sign up for updates and get an exclusive "Golden Mop" skin at launch.</p>
             <form class="flex flex-col sm:flex-row gap-4 justify-center">
-                <input type="email" placeholder="Enter your email" class="px-6 py-3 rounded bg-green-800 text-white border border-green-600 focus:outline-none focus:border-white w-full sm:w-auto placeholder-green-300">
-                <button type="submit" class="px-8 py-3 bg-white text-green-900 font-bold rounded hover:bg-gray-100 transition-colors pixel-font text-xs">
+                <input type="email" placeholder="Enter your email" class="px-6 py-3 rounded bg-red-900 text-white border border-yellow-600 focus:outline-none focus:border-white w-full sm:w-auto placeholder-red-300">
+                <button type="submit" class="px-8 py-3 bg-yellow-600 text-black font-bold rounded hover:bg-yellow-500 transition-colors pixel-font text-xs">
                     SUBSCRIBE
                 </button>
             </form>
         </div>
     </section>
 
-    <footer class="bg-black py-8 text-center text-gray-500 text-sm">
+    <footer class="bg-black py-8 text-center text-gray-600 text-sm border-t border-red-900">
         <p>&copy; 2025 Dungeon Janitor Studios. All rights dirty.</p>
     </footer>
 
@@ -208,8 +213,6 @@
             
             let width, height;
             let isDrawing = false;
-            let clearedPixels = 0;
-            let totalPixels = 0;
             
             // Resize canvas to fill screen
             function resize() {
@@ -218,7 +221,7 @@
                 canvas.width = width;
                 canvas.height = height;
                 
-                // Redraw dirt on resize (resets progress, simple approach)
+                // Redraw dirt on resize
                 fillDirt();
             }
 
@@ -239,12 +242,6 @@
                     ctx.fill();
                 }
 
-                // Add text to canvas so it gets erased too? 
-                // No, keep text separate HTML so it's readable, but cover it slightly?
-                // Let's just keep the canvas opaque dark.
-                
-                totalPixels = width * height;
-                // Initial check (will be 0%)
                 progressBar.style.width = '0%';
             }
             
@@ -264,41 +261,37 @@
                 ctx.beginPath();
                 ctx.arc(x, y, CONFIG.miniGame.mopSize, 0, Math.PI * 2);
                 ctx.fill();
-                
-                // Optimization: Check progress periodically, not every pixel
-                // We'll rely on a throttle or just check every N events for performance if needed.
-                // For now, let's just estimate progress based on mouse movement distance or 
-                // use a simpler "counter" approach. 
-                // Actually, `getImageData` is heavy. Let's approximate "cleared" by just counting scratch events 
-                // or strictly only checking when mouse lifts? 
-                // Let's check on intervals.
             }
             
             let checkInterval = null;
             
             function checkProgress() {
-                // Sample the center area or a grid to guess progress to avoid heavy processing
-                // Or just do the heavy processing because it's a simple landing page.
-                // Let's use a low-res sample.
-                
                 const sampleStep = CONFIG.miniGame.sampleStep;
-                const imageData = ctx.getImageData(0, 0, width, height);
-                const data = imageData.data;
-                let transparentCount = 0;
-                let sampleCount = 0;
-                
-                for (let i = 3; i < data.length; i += 4 * sampleStep) {
-                    sampleCount++;
-                    if (data[i] === 0) { // Alpha channel is 0
-                        transparentCount++;
+                // Get context safely (sometimes issue on detach)
+                if(!ctx) return;
+
+                // Optimization: only sample a portion or handle errors
+                try {
+                    const imageData = ctx.getImageData(0, 0, width, height);
+                    const data = imageData.data;
+                    let transparentCount = 0;
+                    let sampleCount = 0;
+                    
+                    for (let i = 3; i < data.length; i += 4 * sampleStep) {
+                        sampleCount++;
+                        if (data[i] === 0) { // Alpha channel is 0
+                            transparentCount++;
+                        }
                     }
-                }
-                
-                const percentage = Math.floor((transparentCount / sampleCount) * 100);
-                progressBar.style.width = percentage + '%';
-                
-                if (percentage > CONFIG.miniGame.cleanThreshold) {
-                    finishGame();
+                    
+                    const percentage = Math.floor((transparentCount / sampleCount) * 100);
+                    progressBar.style.width = percentage + '%';
+                    
+                    if (percentage > CONFIG.miniGame.cleanThreshold) {
+                        finishGame();
+                    }
+                } catch(e) {
+                    console.error("Canvas read error", e);
                 }
             }
 
@@ -346,8 +339,6 @@
                 if (!isDrawing) return;
                 const pos = getMousePos(e);
                 scratch(pos.x, pos.y);
-                
-                // Add particles effect at cursor (optional polish)
             });
 
             // Touch
@@ -377,6 +368,19 @@
 
             // Skip Button
             document.getElementById('skip-btn').addEventListener('click', finishGame);
+
+            // --- Random Image Logic ---
+            const icons = [
+                'image1.WebP',
+                'image2.WebP',
+                'image3.WebP'
+            ];
+            
+            const randomIcon = document.getElementById('hero-random-icon');
+            if (randomIcon) {
+                const randomIndex = Math.floor(Math.random() * icons.length);
+                randomIcon.src = icons[randomIndex];
+            }
         });
     </script>
 </body>
