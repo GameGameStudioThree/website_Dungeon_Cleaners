@@ -1,4 +1,5 @@
 User-agent: *
-Disallow:
+Disallow: 
+Disallow: /cgi-bin/
 
-Sitemap: https://assoscenaristesfiction.fr/sitemap.xml
+Sitemap: https://https://dungeoncleaners.org/sitemap.xml

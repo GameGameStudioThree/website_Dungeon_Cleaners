@@ -22,6 +22,19 @@
         #dirt-canvas {
             touch-action: none;
         }
+        
+        /* Prevent overscroll on iOS - only when overlay is active */
+        body.intro-active {
+            overscroll-behavior: none;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        #intro-overlay {
+            overscroll-behavior: none;
+        }
 
         .neon-text {
             text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #00ff00, 0 0 30px #00ff00, 0 0 40px #00ff00;
@@ -40,7 +53,7 @@
 <body class="bg-gray-900 text-white overflow-x-hidden">
 
     <!-- Intro / Mini Game Overlay -->
-    <div id="intro-overlay" class="fixed inset-0 z-50 flex items-center justify-center bg-[url('https://images.unsplash.com/photo-1605806616949-1e87b487bc2a?q=80&w=1887&auto=format&fit=crop')] bg-cover bg-center mop-cursor">
+    <div id="intro-overlay" class="fixed inset-0 z-50 flex items-center justify-center bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0ic3RvbmUiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjNGE0YTRhIi8+PHBhdGggZD0iTTAgMGg0MHY0MEgweiIgZmlsbD0iIzVhNWE1YSIgb3BhY2l0eT0iMC4zIi8+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiBmaWxsPSIjM2QzZDNkIiBvcGFjaXR5PSIwLjQiLz48cmVjdCB4PSIyMCIgeT0iMjAiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0iIzNkM2QzZCIgb3BhY2l0eT0iMC40Ii8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0idXJsKCNzdG9uZSkiLz48L3N2Zz4=')] bg-cover bg-center mop-cursor">
         <canvas id="dirt-canvas" class="absolute inset-0 w-full h-full"></canvas>
         <div id="intro-text" class="absolute pointer-events-none text-center select-none z-10 transition-opacity duration-500">
             <h2 class="text-4xl md:text-6xl text-green-400 mb-4 pixel-font neon-text">IT'S A MESS!</h2>
@@ -72,7 +85,7 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="relative h-screen flex items-center justify-center bg-[url('https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&auto=format&fit=crop&w=2071&q=80')] bg-cover bg-center">
+    <section id="home" class="relative h-screen flex items-center justify-center bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyMCIgaGVpZ2h0PSIxMDgwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZHVuZ2VvbiIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMxYTFhMWE7c3RvcC1vcGFjaXR5OjEiIC8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMGYxNzJhO3N0b3Atb3BhY2l0eToxIiAvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxOTIwIiBoZWlnaHQ9IjEwODAiIGZpbGw9InVybCgjZHVuZ2VvbikiLz48Y2lyY2xlIGN4PSI0MDAiIGN5PSIzMDAiIHI9IjUiIGZpbGw9IiM2NjY2NjYiIG9wYWNpdHk9IjAuMyIvPjxjaXJjbGUgY3g9IjgwMCIgY3k9IjIwMCIgcj0iMyIgZmlsbD0iIzY2NjY2NiIgb3BhY2l0eT0iMC4zIi8+PGNpcmNsZSBjeD0iMTIwMCIgY3k9IjQwMCIgcj0iNCIgZmlsbD0iIzY2NjY2NiIgb3BhY2l0eT0iMC4zIi8+PGNpcmNsZSBjeD0iMTYwMCIgY3k9IjMwMCIgcj0iMyIgZmlsbD0iIzY2NjY2NiIgb3BhY2l0eT0iMC4zIi8+PGNpcmNsZSBjeD0iMzAwIiBjeT0iNzAwIiByPSI0IiBmaWxsPSIjNjY2NjY2IiBvcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSIxNDAwIiBjeT0iODAwIiByPSI1IiBmaWxsPSIjNjY2NjY2IiBvcGFjaXR5PSIwLjMiLz48L3N2Zz4=')] bg-cover bg-center">
         <div class="absolute inset-0 bg-black/70"></div>
         <div class="relative z-10 text-center px-4 max-w-4xl mx-auto">
             <div class="mb-8 inline-block">
@@ -139,7 +152,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row items-center gap-12">
                 <div class="w-full md:w-1/2">
-                    <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Gameplay Screenshot" class="rounded-lg shadow-2xl border-2 border-green-600 transform -rotate-2 hover:rotate-0 transition-transform duration-500">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImdhbWVwbGF5IiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMWEyYTJhO3N0b3Atb3BhY2l0eToxIiAvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6IzBmMWYxZjtzdG9wLW9wYWNpdHk6MSIgLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0idXJsKCNnYW1lcGxheSkiLz48dGV4dCB4PSI1MCUiIHk9IjQ1JSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjQ4IiBmaWxsPSIjMjJjNTVlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBvcGFjaXR5PSIwLjgiPvCfp7k8L3RleHQ+PHRleHQgeD0iNTAlIiB5PSI1NSUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyNCIgZmlsbD0iI2FhYWFhYSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgb3BhY2l0eT0iMC42Ij5HYW1lcGxheSBTY3JlZW5zaG90PC90ZXh0Pjwvc3ZnPg==" alt="Gameplay Screenshot" class="rounded-lg shadow-2xl border-2 border-green-600 transform -rotate-2 hover:rotate-0 transition-transform duration-500">
                 </div>
                 <div class="w-full md:w-1/2">
                     <h2 class="text-3xl font-bold text-white mb-6 pixel-font">BEFORE THE NEXT RAID</h2>
@@ -181,9 +194,12 @@
         <p>&copy; 2025 Dungeon Janitor Studios. All rights dirty.</p>
     </footer>
 
+    <script src="config.js"></script>
     <script>
         // --- Mini Game Logic ---
         document.addEventListener('DOMContentLoaded', () => {
+            // Add class to body to prevent scrolling during intro
+            document.body.classList.add('intro-active');
             const canvas = document.getElementById('dirt-canvas');
             const ctx = canvas.getContext('2d');
             const introOverlay = document.getElementById('intro-overlay');
@@ -208,18 +224,18 @@
 
             function fillDirt() {
                 ctx.globalCompositeOperation = 'source-over';
-                ctx.fillStyle = '#1a1a1a'; // Dark background
+                ctx.fillStyle = CONFIG.colors.dirtBase;
                 ctx.fillRect(0, 0, width, height);
                 
-                // Add some "slime" spots
-                for(let i=0; i<50; i++) {
+                // Add some "slime" spots using config values
+                for(let i=0; i<CONFIG.miniGame.slimeSpots; i++) {
                     const x = Math.random() * width;
                     const y = Math.random() * height;
-                    const r = Math.random() * 100 + 50;
+                    const r = Math.random() * (CONFIG.miniGame.slimeMaxSize - CONFIG.miniGame.slimeMinSize) + CONFIG.miniGame.slimeMinSize;
                     
                     ctx.beginPath();
                     ctx.arc(x, y, r, 0, Math.PI * 2);
-                    ctx.fillStyle = Math.random() > 0.5 ? '#1e291b' : '#0f172a'; // Subtle varied dark colors
+                    ctx.fillStyle = Math.random() > 0.5 ? CONFIG.colors.slimeVariant1 : CONFIG.colors.slimeVariant2;
                     ctx.fill();
                 }
 
@@ -246,7 +262,7 @@
             function scratch(x, y) {
                 ctx.globalCompositeOperation = 'destination-out';
                 ctx.beginPath();
-                ctx.arc(x, y, 60, 0, Math.PI * 2);
+                ctx.arc(x, y, CONFIG.miniGame.mopSize, 0, Math.PI * 2);
                 ctx.fill();
                 
                 // Optimization: Check progress periodically, not every pixel
@@ -265,7 +281,7 @@
                 // Or just do the heavy processing because it's a simple landing page.
                 // Let's use a low-res sample.
                 
-                const sampleStep = 20; // check every 20th pixel
+                const sampleStep = CONFIG.miniGame.sampleStep;
                 const imageData = ctx.getImageData(0, 0, width, height);
                 const data = imageData.data;
                 let transparentCount = 0;
@@ -281,12 +297,15 @@
                 const percentage = Math.floor((transparentCount / sampleCount) * 100);
                 progressBar.style.width = percentage + '%';
                 
-                if (percentage > 85) {
+                if (percentage > CONFIG.miniGame.cleanThreshold) {
                     finishGame();
                 }
             }
 
             function finishGame() {
+                // Remove body class to allow scrolling
+                document.body.classList.remove('intro-active');
+                
                 // First fade out the dirt and UI elements to reveal the clean floor fully
                 canvas.style.transition = 'opacity 0.5s';
                 canvas.style.opacity = '0';
@@ -313,7 +332,7 @@
             canvas.addEventListener('mousedown', (e) => {
                 isDrawing = true;
                 scratch(getMousePos(e).x, getMousePos(e).y);
-                if (!checkInterval) checkInterval = setInterval(checkProgress, 200);
+                if (!checkInterval) checkInterval = setInterval(checkProgress, CONFIG.miniGame.progressCheckInterval);
             });
             window.addEventListener('mouseup', () => {
                 isDrawing = false;
@@ -337,7 +356,7 @@
                 isDrawing = true;
                 const pos = getMousePos(e);
                 scratch(pos.x, pos.y);
-                if (!checkInterval) checkInterval = setInterval(checkProgress, 200);
+                if (!checkInterval) checkInterval = setInterval(checkProgress, CONFIG.miniGame.progressCheckInterval);
             }, { passive: false });
             canvas.addEventListener('touchend', () => {
                 isDrawing = false;
