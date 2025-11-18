@@ -87,6 +87,13 @@
         .logo-anim {
             animation: logo-pulse 3s ease-in-out infinite;
         }
+        @keyframes spin-slow {
+            from { transform: rotate(0deg) scale(1.25); }
+            to { transform: rotate(360deg) scale(1.25); }
+        }
+        .radial-spin {
+            animation: spin-slow 10s linear infinite;
+        }
     </style>
 </head>
 <body class="bg-[#1a0505] text-white overflow-x-hidden">
@@ -125,14 +132,18 @@
 
     <!-- Hero Section -->
     <section id="home" class="relative h-screen flex items-center justify-center bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyMCIgaGVpZ2h0PSIxMDgwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZHVuZ2VvbiIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMxYTFhMWE7c3RvcC1vcGFjaXR5OjEiIC8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMGYxNzJhO3N0b3Atb3BhY2l0eToxIiAvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxOTIwIiBoZWlnaHQ9IjEwODAiIGZpbGw9InVybCgjZHVuZ2VvbikiLz48Y2lyY2xlIGN4PSI0MDAiIGN5PSIzMDAiIHI9IjUiIGZpbGw9IiM2NjY2NjYiIG9wYWNpdHk9IjAuMyIvPjxjaXJjbGUgY3g9IjgwMCIgY3k9IjIwMCIgcj0iMyIgZmlsbD0iIzY2NjY2NiIgb3BhY2l0eT0iMC4zIi8+PGNpcmNsZSBjeD0iMTIwMCIgY3k9IjQwMCIgcj0iNCIgZmlsbD0iIzY2NjY2NiIgb3BhY2l0eT0iMC4zIi8+PGNpcmNsZSBjeD0iMTYwMCIgY3k9IjMwMCIgcj0iMyIgZmlsbD0iIzY2NjY2NiIgb3BhY2l0eT0iMC4zIi8+PGNpcmNsZSBjeD0iMzAwIiBjeT0iNzAwIiByPSI0IiBmaWxsPSIjNjY2NjY2IiBvcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSIxNDAwIiBjeT0iODAwIiByPSI1IiBmaWxsPSIjNjY2NjY2IiBvcGFjaXR5PSIwLjMiLz48L3N2Zz4=')] bg-cover bg-center">
-        <div class="absolute inset-0 bg-[#0f0202]/80"></div>
+        <div class="absolute inset-0 bg-[url('image/radial.gif')] bg-cover bg-center opacity-60 mix-blend-overlay"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(circle,rgba(50,10,10,0.4)_0%,rgba(15,2,2,0.95)_80%)]"></div>
         <div class="relative z-10 text-center px-4 max-w-4xl mx-auto">
             <div class="mb-8 inline-block">
                 <span class="bg-yellow-600 text-black text-xs px-2 py-1 rounded font-bold uppercase tracking-wide">Coming 2025</span>
             </div>
             
             <!-- Fixed Logo -->
-            <img src="image/logo.webp" alt="Dungeon Janitor Logo" class="w-full max-w-lg mx-auto mb-8 logo-anim">
+            <div class="relative w-full max-w-xl mx-auto mb-8">
+                <img src="image/radial.png" alt="" class="absolute inset-0 w-full h-full object-contain opacity-50 mix-blend-screen radial-spin">
+                <img src="image/logo.webp" alt="Dungeon Janitor Logo" class="relative z-10 w-full logo-anim">
+            </div>
 
             <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
                 Heroes slay the monsters. You clean up the mess. Experience the first-ever visceral first-person janitorial simulator set in a fantasy dungeon.
@@ -141,7 +152,7 @@
                 <a href="http://site2.com" class="inline-block px-8 py-4 bg-red-800 hover:bg-red-700 text-white font-bold rounded shadow-[0_0_15px_rgba(255,215,0,0.3)] transition-all transform hover:scale-105 pixel-font text-sm border border-yellow-600 no-underline">
                     PLAY TRAILER
                 </a>
-                <a href="https://store.steampowered.com/app/3756600/Dungeon_Cleaners/" class="inline-block px-8 py-4 bg-transparent border-2 border-white hover:bg-white hover:text-black text-white font-bold rounded transition-all transform hover:scale-105 pixel-font text-sm no-underline">
+                <a href="https://store.steampowered.com/app/3756600/Dungeon_Cleaners/" target="_blank" rel="noopener noreferrer" class="inline-block px-8 py-4 bg-transparent border-2 border-white hover:bg-white hover:text-black text-white font-bold rounded transition-all transform hover:scale-105 pixel-font text-sm no-underline">
                     WISHLIST ON STEAM
                 </a>
             </div>
@@ -231,13 +242,42 @@
     </section>
 
     <footer class="bg-black py-8 text-center text-gray-600 text-sm border-t border-red-900">
+        <div class="flex justify-center gap-6 mb-6">
+            <!-- Instagram -->
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-yellow-500 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.232-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
+                </svg>
+            </a>
+            <!-- Steam -->
+            <a href="https://store.steampowered.com" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-yellow-500 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M.329 10.333A8.01 8.01 0 0 0 7.99 16C12.414 16 16 12.418 16 8s-3.586-8-8.009-8A8.006 8.006 0 0 0 0 7.468l.003.006 4.304 1.769A2.198 2.198 0 0 1 5.62 8.88l1.96-2.844-.001-.04a3.046 3.046 0 0 1 3.042-3.043 3.046 3.046 0 0 1 3.042 3.043 3.047 3.047 0 0 1-3.111 3.044l-2.804 2a2.223 2.223 0 0 1-3.075 2.11 2.217 2.217 0 0 1-1.312-1.568L.33 10.333Z"/>
+                    <path d="M4.868 12.683a1.715 1.715 0 0 0 1.318-3.165 1.705 1.705 0 0 0-1.263.02l.476.425c.15.135.282.28.393.434.369-.268.532-.75.419-1.217-.192-.79-1.059-1.258-1.825-.955l-.596-.532A2.32 2.32 0 0 1 5.6 6.99c1.287 0 2.33 1.043 2.33 2.33s-1.043 2.33-2.33 2.33c-1.287 0-2.33-1.043-2.33-2.33 0-.38.093-.737.258-1.053l.84.753c-.048.097-.074.206-.074.319 0 .605.62 1.032 1.154.84l-.61-.546a.66.66 0 0 1-.27.03.66.66 0 0 1-.61-.9.659.659 0 0 1 1.077.206l-.16.142c-.211.187-.446.352-.698.491a1.71 1.71 0 0 0 .69.083z"/>
+                </svg>
+            </a>
+            <!-- TikTok -->
+            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-yellow-500 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M9 0h1.98c.144.715.54 1.617 1.235 2.512C12.895 3.389 13.797 4 15 4v2c-1.753 0-3.07-.814-4-1.829V11a5 5 0 1 1-5-5v2a3 3 0 1 0 3 3V0Z"/>
+                </svg>
+            </a>
+            <!-- Twitch -->
+            <a href="https://twitch.com" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-yellow-500 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M3.857 0 1 2.857v10.286h3.429V16l2.857-2.857H9.57L14.714 8V0H3.857zm9.714 7.429-2.285 2.285H9l-2 2v-2H4.429V1.143h9.142v6.286z"/>
+                    <path d="M11.857 3.143h-1.143V6.57h1.143V3.143zm-3.143 0H7.571V6.57h1.143V3.143z"/>
+                </svg>
+            </a>
+        </div>
         <p>&copy; 2025 Dungeon Janitor Studios. All rights dirty.</p>
     </footer>
 
     <!-- Audio Player Controls -->
-    <div id="audio-controls" class="fixed bottom-4 left-4 z-50 hidden">
+    <div id="audio-controls" class="fixed bottom-4 left-4 z-50 hidden flex flex-col items-center">
+        <span id="play-hint" class="text-yellow-500 text-xs pixel-font mb-2 animate-bounce shadow-black drop-shadow-md select-none pointer-events-none">PLAY ME</span>
         <button id="music-toggle" class="bg-red-900/80 hover:bg-red-800 text-yellow-500 border border-yellow-600 p-3 rounded-full shadow-lg transition-all hover:scale-110 cursor-pointer">
-            <span id="music-icon">🔊</span>
+            <span id="music-icon">🔇</span>
         </button>
         <audio id="bg-music" loop>
             <source src="music/audio.mp3" type="audio/mpeg">
@@ -437,36 +477,27 @@
             const bgMusic = document.getElementById('bg-music');
             const musicIcon = document.getElementById('music-icon');
             const audioControls = document.getElementById('audio-controls');
-            let isPlaying = false;
+            const playHint = document.getElementById('play-hint');
 
-            // Function to try playing music (browser might block if no interaction)
             function startMusic() {
                 audioControls.classList.remove('hidden');
-                bgMusic.volume = 0.3; // Set volume to 30%
-                const playPromise = bgMusic.play();
-                
-                if (playPromise !== undefined) {
-                    playPromise.then(_ => {
-                        isPlaying = true;
-                        musicIcon.textContent = '🔊';
-                    })
-                    .catch(error => {
-                        console.log("Auto-play prevented. User must click play.");
-                        isPlaying = false;
-                        musicIcon.textContent = '🔇';
-                    });
-                }
+                // Start paused (muted)
+                bgMusic.pause();
+                bgMusic.currentTime = 0;
+                bgMusic.volume = 0.3;
+                musicIcon.textContent = '🔇';
             }
 
             musicToggle.addEventListener('click', () => {
-                if (isPlaying) {
+                if (bgMusic.paused) {
+                    bgMusic.play().then(() => {
+                         musicIcon.textContent = '🔊';
+                         if(playHint) playHint.style.display = 'none';
+                    }).catch(e => console.error("Audio play error:", e));
+                } else {
                     bgMusic.pause();
                     musicIcon.textContent = '🔇';
-                } else {
-                    bgMusic.play();
-                    musicIcon.textContent = '🔊';
                 }
-                isPlaying = !isPlaying;
             });
 
             // Hook into finishGame to start music
