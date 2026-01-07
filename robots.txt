@@ -2,4 +2,4 @@ User-agent: *
 Disallow: 
 Disallow: /cgi-bin/
 
-Sitemap: https://https://dungeoncleaners.org/sitemap.xml
+Sitemap: https://dungeoncleaners.org/sitemap.xml
