@@ -139,7 +139,7 @@
 
 <body class="bg-[#1a0505] text-white overflow-x-hidden">
     <!-- Intro / Mini Game Overlay -->
-    <div id="intro-overlay" class="fixed inset-0 z-50 flex items-center justify-center bg-[url('image/first_screen_clean.webp')] bg-cover bg-center md:bg-center bg-right mop-cursor">
+     <div id="intro-overlay" class="fixed inset-0 z-50 flex items-center justify-center bg-[url('image/first_screen_clean.webp')] bg-contain bg-no-repeat bg-center mop-cursor">
         <canvas id="dirt-canvas" class="absolute inset-0 w-full h-full"></canvas>
         <div id="intro-text" class="absolute pointer-events-none text-center select-none z-10 transition-opacity duration-500">
             <h2 class="text-4xl md:text-6xl text-yellow-500 mb-4 pixel-font neon-text">IT'S A MESS!</h2>
@@ -156,8 +156,10 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center">
-                    <span class="text-yellow-500 text-xl pixel-font">DC</span>
-                </div>
+					<a href="#home" class="inline-flex items-center">
+                        <img src="logo_top_left.png" alt="dungeon cleaner app icon" class="h-10 w-10 object-contain" />
+                    </a>                
+				</div>
 
                 <!-- Desktop Menu -->
                 <div class="hidden md:block">
