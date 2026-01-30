@@ -137,6 +137,82 @@
 	<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Dungeon Cleaners","url":"https://dungeoncleaners.org","logo":{"@type":"ImageObject","url":"https://dungeoncleaners.org/image/logo_3D.webp"},"sameAs":["https://www.youtube.com/@DungeonCleaners","https://store.steampowered.com/app/3756600/Dungeon_Cleaners/","https://www.tiktok.com/@dungeoncleaners","https://www.instagram.com/dungeon_cleaners/"]}</script>
 </head>
 
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const RSS_URL = "https://api.rss2json.com/v1/api.json?rss_url=https://store.steampowered.com/feeds/news/app/3756600";
+
+  fetch(RSS_URL)
+    .then(r => r.json())
+    .then(data => {
+      const container = document.getElementById("steam-news-container");
+      if (!data.items || data.items.length === 0) {
+        container.innerHTML = "<p class='text-gray-400 col-span-full text-center'>NO NEWS FOUND AT THE MOMENT.</p>";
+        return;
+      }
+      
+      container.innerHTML = "";
+      
+      // Older on left, newer on right: The RSS usually returns newest first.
+      // So we slice the newest 3 or 6, then reverse them.
+      const newsItems = data.items.slice(0, 3).reverse();
+
+      newsItems.forEach(item => {
+        // Try to get the Steam Banner specifically. 
+        // Steam RSS via rss2json often puts the banner in the thumbnail or enclosure, 
+        // but it's most reliable to look for the "capsule" or header image.
+        let imageUrl = 'https://dungeoncleaners.org/image/photo_cleaners_posing.webp';
+        
+        // 1. Check enclosure (often contains the high-res banner)
+        if (item.enclosure && item.enclosure.link) {
+            imageUrl = item.enclosure.link;
+        } 
+        // 2. Check thumbnail property
+        else if (item.thumbnail) {
+            imageUrl = item.thumbnail;
+        }
+        // 3. Extract from content if not found (Steam usually puts header first)
+        else {
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = item.content;
+            const firstImg = tempDiv.querySelector('img');
+            if (firstImg && firstImg.src) imageUrl = firstImg.src;
+        }
+        
+        // Specific Steam URL transformation to ensure we get a large image if it's a small thumb
+        imageUrl = imageUrl.replace('http://', 'https://');
+        if (imageUrl.includes('steamstatic.com') && imageUrl.includes('_120x63.jpg')) {
+            imageUrl = imageUrl.replace('_120x63.jpg', '_600x338.jpg');
+        }
+        // If we find a common Steam static image or small thumb, we try to keep it if it's the actual news header
+        
+        // Clean text (remove HTML tags)
+        const cleanText = item.description.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').substring(0, 150) + "...";
+
+        const card = `
+          <a href="${item.link}" target="_blank" class="group bg-[#120303] border border-red-900 rounded-lg overflow-hidden transition-all hover:border-yellow-500 hover:scale-[1.02] flex flex-col">
+            <div class="h-48 overflow-hidden bg-black">
+                <img src="${imageUrl}" alt="${item.title}" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+            </div>
+            <div class="p-5 flex-grow">
+                <p class="text-xs text-red-500 mb-2 font-bold uppercase tracking-widest">${new Date(item.pubDate).toLocaleDateString()}</p>
+                <h3 class="text-yellow-500 font-bold mb-3 text-lg leading-tight group-hover:text-yellow-400">${item.title}</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">${cleanText}</p>
+            </div>
+            <div class="p-5 pt-0 mt-auto">
+                <span class="text-xs font-bold text-white uppercase border-b border-yellow-600 pb-1 group-hover:text-yellow-500">Read More →</span>
+            </div>
+          </a>`;
+        container.innerHTML += card;
+      });
+    })
+    .catch(err => {
+        console.error(err);
+        document.getElementById("steam-news-container").innerHTML = "<p class='text-gray-400 col-span-full text-center'>FAILED TO LOAD NEWS.</p>";
+    });
+});
+</script>
+
+
 <body class="bg-[#1a0505] text-white overflow-x-hidden">
     <!-- Intro / Mini Game Overlay -->
      <div id="intro-overlay" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-[url('image/first_screen_clean.webp')] bg-contain bg-no-repeat bg-center mop-cursor">
@@ -165,6 +241,7 @@
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-4">
                         <a href="#home" class="hover:bg-red-900 text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="#updates" class="hover:bg-red-900 text-gray-300 px-3 py-2 rounded-md text-sm font-medium">Updates</a>
                         <a href="#features" class="hover:bg-red-900 text-gray-300 px-3 py-2 rounded-md text-sm font-medium">Features</a>
                         <a href="#media" class="hover:bg-red-900 text-gray-300 px-3 py-2 rounded-md text-sm font-medium">Media</a>
                         <a href="#trailer" class="hover:bg-red-900 text-gray-300 px-3 py-2 rounded-md text-sm font-medium">Trailer</a>
@@ -188,6 +265,7 @@
         <div class="hidden md:hidden bg-[#1a0505] border-b border-red-900 absolute w-full" id="mobile-menu">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 shadow-lg">
                 <a href="#home" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-red-900">Home</a>
+                <a href="#updates" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-red-900">Updates</a>
                 <a href="#features" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-red-900">Features</a>
                 <a href="#media" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-red-900">Media</a>
                 <a href="#trailer" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-red-900">Trailer</a>
@@ -228,28 +306,29 @@
         </div>
     </section>
 	
- <!-- News Section (NEW) -->
-    <section id="news" class="py-20 bg-[#1a0505] border-t border-red-900">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 pixel-font text-yellow-500">DEVLOG NEWS</h2>
-                <p class="text-gray-400 mb-8">Latest updates straight from the dungeon floor</p>
-                <div class="w-24 h-1 bg-yellow-600 mx-auto"></div>
-            </div>
-            
-            <div id="steam-news-container" class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Loading State -->
-                <div class="col-span-full text-center py-10">
-                    <div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-yellow-500 mb-4"></div>
-                    <p class="pixel-font text-xs">RETRIVING DATA FROM STEAM...</p>
-                </div>
-            </div>
-            
-            <div class="text-center mt-12">
-                <a href="https://store.steampowered.com/news/app/3756600" target="_blank" class="inline-block px-6 py-3 border border-yellow-600 text-yellow-500 hover:bg-yellow-600 hover:text-black transition-all rounded pixel-font text-xs">VIEW ALL ON STEAM</a>
-            </div>
+   <!-- New Features and Updates / Steam News Section -->
+	<section id="updates" class="py-24 bg-[#1a0505] border-t border-red-900 relative">
+      <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-yellow-600 to-transparent opacity-30"></div>
+	  <div class="max-w-7xl mx-auto px-4">
+		<div class="text-center mb-16">
+            <h2 class="pixel-font text-yellow-500 mb-4">NEW FEATURES & UPDATES</h2>
+            <p class="text-gray-400 max-w-2xl mx-auto">Stay up to date with the latest developments directly from the dungeon. Older updates on the left, newer on the right.</p>
         </div>
-    </section>
+
+		<div id="steam-news-container"
+			 class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+		  <div class="col-span-full flex flex-col items-center justify-center py-20">
+              <div class="w-12 h-12 border-4 border-yellow-600 border-t-transparent rounded-full animate-spin mb-4"></div>
+			  <p class="text-gray-400 pixel-font text-xs">RETRIVING INTEL FROM STEAM...</p>
+		  </div>
+		</div>
+        
+        <div class="mt-16 text-center">
+            <a href="https://store.steampowered.com/news/app/3756600" target="_blank" class="inline-block border border-red-900 px-6 py-3 rounded text-sm font-bold text-gray-400 hover:text-white hover:border-yellow-600 transition-colors">VIEW ALL STEAM POSTS</a>
+        </div>
+	  </div>
+	</section>
+
 	
     <!-- Features Section -->
     <section id="features" class="py-20 bg-[#2a0a0a]">
@@ -604,7 +683,7 @@
                     carouselImg.onload = () => {
                         carouselImg.style.opacity = '1'; 
                     };
-                }, 00); //time of transition
+                }, 100); //time of transition
             }, 4000); //time of display
 
             // --- Audio Player Logic ---
