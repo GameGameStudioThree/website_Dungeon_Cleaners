@@ -166,9 +166,9 @@ document.addEventListener("DOMContentLoaded", () => {
       
       container.innerHTML = "";
       
-      // Older on left, newer on right: The RSS usually returns newest first.
-      // So we slice the newest 3 or 6, then reverse them.
-      const newsItems = data.items.slice(0, 3).reverse();
+      // Newer on left, older on right.
+      // The RSS already returns newest first, so we just take the first 3.
+      const newsItems = data.items.slice(0, 3);
 
       newsItems.forEach(item => {
         // Try to get the Steam Banner specifically. 
