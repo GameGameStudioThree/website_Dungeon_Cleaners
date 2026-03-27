@@ -254,11 +254,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 <!-- Desktop Menu -->
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-4">
-                        <a href="#home" class="hover:bg-red-900 text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
+						<a href="#trailer" class="hover:bg-red-900 text-gray-300 px-3 py-2 rounded-md text-sm font-medium">Trailer</a>
                         <a href="#updates" class="hover:bg-red-900 text-gray-300 px-3 py-2 rounded-md text-sm font-medium">Updates</a>
-                        <a href="#features" class="hover:bg-red-900 text-gray-300 px-3 py-2 rounded-md text-sm font-medium">Features</a>
-                        <a href="#media" class="hover:bg-red-900 text-gray-300 px-3 py-2 rounded-md text-sm font-medium">Media</a>
-                        <a href="#trailer" class="hover:bg-red-900 text-gray-300 px-3 py-2 rounded-md text-sm font-medium">Trailer</a>
+                        <a href="#features" class="hover:bg-red-900 text-gray-300 px-3 py-2 rounded-md text-sm font-medium">Features</a>                        
                         <a href="https://store.steampowered.com/app/3756600/Dungeon_Cleaners/" class="bg-red-800 hover:bg-red-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors border border-yellow-600 inline-block">Whishlist Now</a>
                     </div>
                 </div>
@@ -278,49 +276,34 @@ document.addEventListener("DOMContentLoaded", () => {
         <!-- Mobile Menu -->
         <div class="hidden md:hidden bg-[#1a0505] border-b border-red-900 absolute w-full" id="mobile-menu">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 shadow-lg">
-                <a href="#home" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-red-900">Home</a>
-                <a href="#updates" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-red-900">Updates</a>
-                <a href="#features" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-red-900">Features</a>
-                <a href="#media" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-red-900">Media</a>
                 <a href="#trailer" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-red-900">Trailer</a>
+                <a href="#updates" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-red-900">Updates</a>
+                <a href="#features" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-red-900">Features</a         
                 <a href="https://store.steampowered.com/app/3756600/Dungeon_Cleaners/" class="block px-3 py-2 rounded-md text-base font-medium text-white bg-red-800 hover:bg-red-700 border border-yellow-600 mt-4 mx-3 text-center">Whishlist Now</a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="relative min-h-screen flex items-center justify-center bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyMCIgaGVpZ2h0PSIxMDgwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZHVuZ2VvbiIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMxYTFhMWE7c3RvcC1vcGFjaXR5OjEiIC8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMGYxNzJhO3N0b3Atb3BhY2l0eToxIiAvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxOTIwIiBoZWlnaHQ9IjEwODAiIGZpbGw9InVybCgjZHVuZ2VvbikiLz48Y2lyY2xlIGN4PSI0MDAiIGN5PSIzMDAiIHI9IjUiIGZpbGw9IiM2NjY2NjYiIG9wYWNpdHk9IjAuMyIvPjxjaXJjbGUgY3g9IjgwMCIgY3k9IjIwMCIgcj0iMyIgZmlsbD0iIzY2NjY2NiIgb3BhY2l0eT0iMC4zIi8+PGNpcmNsZSBjeD0iMTIwMCIgY3k9IjQwMCIgcj0iNCIgZmlsbD0iIzY2NjY2NiIgb3BhY2l0eT0iMC4zIi8+PGNpcmNsZSBjeD0iMTYwMCIgY3k9IjMwMCIgcj0iMyIgZmlsbD0iIzY2NjY2NiIgb3BhY2l0eT0iMC4zIi8+PGNpcmNsZSBjeD0iMzAwIiBjeT0iNzAwIiByPSI0IiBmaWxsPSIjNjY2NjY2IiBvcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSIxNDAwIiBjeT0iODAwIiByPSI1IiBmaWxsPSIjNjY2NjY2IiBvcGFjaXR5PSIwLjMiLz48L3N2Zz4=')] bg-cover bg-center pt-20">
-        <div class="absolute inset-0 bg-[url('image/radial.gif')] bg-cover bg-center opacity-60 mix-blend-overlay"></div>
-        <div class="absolute inset-0 bg-[radial-gradient(circle,rgba(50,10,10,0.4)_0%,rgba(15,2,2,0.95)_80%)]"></div>
-        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto py-12">
-            
-            <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto uppercase text-yellow-500 mr-2">The Official Website of Dungeon Cleaners</p>
-			
-			<!-- Coming badge moved UNDER the logo -->
-			<div class="mt-6">
-				<span class="bg-yellow-600 text-black text-xs px-2 py-1 rounded font-bold uppercase tracking-wide">Demo available TODAY !!!</span>
-			</div>
-			
-	<!-- Fixed Logo -->
-            <div class="relative w-full max-w-2xl mx-auto mb-6">
-                <img src="image/radial.webp" class="absolute inset-0 w-full h-full object-contain opacity-50 mix-blend-screen radial-spin">
-                <img src="image/logo_3D.webp" alt="Dungeon Cleaners Logo" class="relative z-10 w-full fetchpriority=high logo-anim">
-            </div>           
-            <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
-                Heroes came for the treasures and failed. Your job is to clean up their mess. Experience the first-ever visceral first-person janitorial simulator set in a fantasy dungeon.
-            </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-6">
-                <a href="#trailer" id="play-trailer-btn" class="inline-block px-8 py-4 bg-red-800 hover:bg-red-700 text-white rounded shadow-[0_0_15px_rgba(255,215,0,0.3)] transition-all transform hover:scale-105 pixel-font text-sm border border-yellow-600 no-underline jiggle-anim">
-                    PLAY TRAILER
-                </a>
-                <a href="https://store.steampowered.com/app/3756600/Dungeon_Cleaners/" target="_blank" rel="noopener noreferrer" class="inline-block px-8 py-4 bg-transparent border-2 border-white hover:bg-white hover:text-black text-white rounded transition-all transform hover:scale-105 pixel-font text-sm no-underline">
-                    WISHLIST ON STEAM
-                </a>
+    <!-- Trailer Section -->
+    <section id="trailer" class="py-20 bg-[#2a0a0a]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> 
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl text-white mb-4 pixel-font text-yellow-500">PLAY THE DEMO TODAY !!!</h2>
+                <div class="w-24 h-1 bg-yellow-600 mx-auto"></div>
+            </div>
+            <div class="flex justify-center">
+                <iframe width="960" height="540" src="https://www.youtube.com/embed/TjCDD7AM6jU" title="Your friends communicate with you in the liminal dungeon" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen class="rounded-lg shadow-2xl border-4 border-yellow-600" style="max-width: 90vw; max-height: 90vh;"></iframe>
             </div>
         </div>
+		
+		<div class="flex flex-col sm:flex-row justify-center gap-6">
+			<a href="https://store.steampowered.com/app/3756600/Dungeon_Cleaners/" id="play-trailer-btn" class="inline-block px-8 py-4 bg-red-800 hover:bg-red-700 text-white rounded shadow-[0_0_15px_rgba(255,215,0,0.3)] transition-all transform hover:scale-105 pixel-font text-sm border border-yellow-600 no-underline jiggle-anim">
+				WISHLIST ON STEAM
+			</a>
+		</div>
     </section>
 	
-   <!-- New Features and Updates / Steam News Section -->
+   <!-- Updates Steam News Section -->
 	<section id="updates" class="py-24 bg-[#1a0505] border-t border-red-900 relative">
       <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-yellow-600 to-transparent opacity-30"></div>
 	  <div class="max-w-7xl mx-auto px-4">
@@ -344,47 +327,8 @@ document.addEventListener("DOMContentLoaded", () => {
 	</section>
 
 	
-    <!-- Features Section -->
-    <section id="features" class="py-20 bg-[#2a0a0a]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl text-white mb-4 pixel-font text-yellow-500">GAME FEATURES</h2>
-                <div class="w-24 h-1 bg-yellow-600 mx-auto"></div>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Feature 1 -->
-                <div class="bg-[#3d1010] p-8 rounded-lg border border-red-900 hover:border-yellow-500 transition-colors float-anim" style="animation-delay: 0s;">
-                    <div class="text-4xl mb-4">🧹</div>
-                    <h3 class="text-xl font-bold text-white mb-2">Mopping that filthy dungeon</h3>
-                    <p class="text-gray-400">
-                        You are not the kind of people that get any fame but at least you have the satisfaction of a well done job.
-                    </p>
-                </div>
-                
-                <!-- Feature 2 -->
-                <div class="bg-[#3d1010] p-8 rounded-lg border border-red-900 hover:border-yellow-500 transition-colors float-anim" style="animation-delay: 1s;">
-                    <div class="text-4xl mb-4">🧪</div>
-                    <h3 class="text-xl font-bold text-white mb-2">Upgrades for performance</h3>
-                    <p class="text-gray-400">
-                        Upgrade your mop, bucket, and cart with legendary shopping. Drink energy can and run like rabbits.
-                    </p>
-                </div>
-                
-                <!-- Feature 3 -->
-                <div class="bg-[#3d1010] p-8 rounded-lg border border-red-900 hover:border-yellow-500 transition-colors float-anim" style="animation-delay: 2s;">
-                    <div class="text-4xl mb-4">💰</div>
-                    <h3 class="text-xl font-bold text-white mb-2">Loot the Leftovers</h3>
-                    <p class="text-gray-400">
-                        Keep what the heroes missed. Don't forget you are doing this for the money.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Media Section -->
-    <section id="media" class="py-20 bg-[#1a0505]">
+    <section id="features" class="py-20 bg-[#2a0a0a]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row items-center gap-12">
                 <div class="w-full md:w-1/2">
@@ -411,18 +355,7 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
     </section>
 
-    <!-- Trailer Section -->
-    <section id="trailer" class="py-20 bg-[#2a0a0a]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl text-white mb-4 pixel-font text-yellow-500">WATCH THE TRAILER</h2>
-                <div class="w-24 h-1 bg-yellow-600 mx-auto"></div>
-            </div>
-            <div class="flex justify-center">
-                <iframe width="960" height="540" src="https://www.youtube.com/embed/TjCDD7AM6jU" title="Your friends communicate with you in the liminal dungeon" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen class="rounded-lg shadow-2xl border-4 border-yellow-600" style="max-width: 90vw; max-height: 90vh;"></iframe>
-            </div>
-        </div>
-    </section>
+
 
 	    <!-- Join Discord / Keep in Touch -->
     <section class="py-20 bg-red-950 relative overflow-hidden border-t border-red-900">
