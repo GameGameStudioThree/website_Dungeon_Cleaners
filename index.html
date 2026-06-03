@@ -696,6 +696,13 @@ document.addEventListener("DOMContentLoaded", () => {
                     link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
                 });
             }
+
+            // WISHLIST BUTTONS: open Steam web page in new tab + keep existing Steam desktop app protocol
+            document.querySelectorAll('a[href="steam://store/3756600"]').forEach(wishlistBtn => {
+                wishlistBtn.addEventListener('click', () => {
+                    window.open('https://store.steampowered.com/app/3756600/Dungeon_Cleaners/', '_blank');
+                });
+            });
         });
     </script>
 </body>
